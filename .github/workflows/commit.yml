@@ -1,0 +1,31 @@
+name: "Commit"
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+permissions:
+  checks: write
+  packages:	write
+
+jobs:
+  build-latest-android-image:
+    runs-on: ubuntu-latest
+    needs:
+      - compile-binary
+    steps:
+      - name: "Git Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Log in to GitHub Docker registry"
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+
+      - name: "Build Docker image"
+        run: docker build -f ci/Dockerfile-android-sdk-34 -t ghcr.io/${{ github.repository_owner }}/android-sdk-34:latest .
+
+      - name: "Push Docker image"
+        run: docker push ghcr.io/${{ github.repository_owner }}/android-sdk-34:latest
