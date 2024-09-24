@@ -63,7 +63,7 @@ RUN wget -O /tmp/cmdline-tools.zip -t 5 "https://dl.google.com/android/repositor
 
 # If there is a new version of Android OS, SDK, or other tools update these values
 ENV ANDROID_API_TARGET "34"
-ARG ANDROID_BUILD_TOOLS_VERSION "35.0.0"
+ARG ANDROID_BUILD_TOOLS_VERSION "35.0.0-rc4"
 ENV PATH "${PATH}:${ANDROID_NDK_BIN}"
 
 # Installs Android SDK + Platform Tools. Automatically agrees to licenses
