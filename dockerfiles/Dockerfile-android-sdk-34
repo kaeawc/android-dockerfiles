@@ -62,15 +62,12 @@ RUN wget -O /tmp/cmdline-tools.zip -t 5 "https://dl.google.com/android/repositor
     chmod +x "${ANDROID_CMDLINE_TOOLS_BIN}/sdkmanager"
 
 # If there is a new version of Android OS, SDK, or other tools update these values
-ENV ANDROID_API_TARGET "34"
-ARG ANDROID_BUILD_TOOLS_VERSION "35.0.0-rc4"
+ENV ANDROID_API_TARGET="34"
+ARG ANDROID_BUILD_TOOLS_VERSION="35.0.0-rc4"
 ENV PATH "${PATH}:${ANDROID_NDK_BIN}"
 
 # Installs Android SDK + Platform Tools. Automatically agrees to licenses
 # Run `sdkmanager --list` to see all available options
-RUN (yes || true) | "${ANDROID_CMDLINE_TOOLS_BIN}/sdkmanager" --verbose \
-    "platform-tools" \
-    "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
-    "platforms;android-${ANDROID_API_TARGET}"
+RUN (yes || true) | "${ANDROID_CMDLINE_TOOLS_BIN}/sdkmanager" --verbose "platform-tools" "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" "platforms;android-${ANDROID_API_TARGET}"
 
 RUN cd "${ANDROID_HOME}" && echo "$(pwd)"
