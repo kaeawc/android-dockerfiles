@@ -1,2 +1,4 @@
 # android-dockerfiles
-Bare minimum needed for fully fledged Android CI tasks
+
+Repository of Android Dockerfiles purpose built for fast and reliable CI.
+
